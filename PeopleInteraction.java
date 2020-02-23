@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *
@@ -58,6 +61,14 @@ public class PeopleInteraction {
         } catch (FileNotFoundException e) {
             System.out.println();
         }
+    }
+
+    public void getTime()
+    {
+      Date today = Calendar.getInstance().getTime();
+      SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy HH:mm");
+      String formattedDate = formatter.format(today);
+      System.out.println(formattedDate);
     }
 
 }
