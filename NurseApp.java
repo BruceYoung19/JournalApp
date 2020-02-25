@@ -5,8 +5,8 @@
  */
 package nurseapp;
 
-import java.io.IOException;
 
+import java.io.IOException;
 /**
  *
  * @author Bruce
@@ -22,5 +22,5 @@ public class NurseApp {
         pi.CreateFile();
         pi.FileSetup();
     }
-    
+
 }
