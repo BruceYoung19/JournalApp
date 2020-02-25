@@ -68,19 +68,38 @@ import java.util.Scanner;
          }
      }
 
-     public void getTime()
+     public String getTime()
      {
        Date today = Calendar.getInstance().getTime();
        SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy HH:mm");
        String formattedDate = formatter.format(today);
-       System.out.println(formattedDate);
+       return formattedDate;
      }
 
      public void getData()
      {
+       //Getting the Users Name
        System.out.println("What is your name?");
-       name = scan.hasNextLine();
+       name = scan.nextLine();
        System.out.println("Name:" + name);
+
+       //Getting the entryNumber
+       System.out.println("What is your entryNumber?");
+       entryNumber = scan.nextInt();
+       System.out.println("Entry Number:" + entryNumber);
+
+       // DO NOT REMOVE THIS
+       // THIS IS TO RESOLVE AN ERROR IN THE SCANNER
+       scan.nextLine();
+
+       //Getting the dialog
+       System.out.println("What is your dialog?");
+       dialog = scan.nextLine();
+       System.out.println("dialog:" + dialog);
+
+       //getting Time and date
+       timeAndDate = getTime();
+       System.out.println("Time:" + timeAndDate);
      }
 
  }
