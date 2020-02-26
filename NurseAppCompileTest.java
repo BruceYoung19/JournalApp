@@ -51,6 +51,7 @@ import java.util.Scanner;
              fw.flush();
              fw.close();
          } catch (FileNotFoundException e) {
+            //NOT SURE WHETHER THE CORRECT MESSAGE NEED TO CHECK WITH Bruce
              System.err.println("This File has not been found");
          }
      }
@@ -71,7 +72,7 @@ import java.util.Scanner;
      public String getTime()
      {
        Date today = Calendar.getInstance().getTime();
-       SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy HH:mm");
+       SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd yyyy HH:mm");
        String formattedDate = formatter.format(today);
        return formattedDate;
      }
@@ -102,7 +103,34 @@ import java.util.Scanner;
        System.out.println("Time:" + timeAndDate);
      }
 
+     public void writeData() throws IOException {
+      try {
+        FileWriter fw = new FileWriter("Journal.csv", true);
+        fw.append(name);
+        fw.append(",");
+
+        //Converting the entryNumber to string before  Writing text into File
+        String cEntryNumber = String.valueOf(entryNumber);
+
+        fw.append(cEntryNumber);
+        fw.append(",");
+
+        fw.append(dialog);
+        fw.append(",");
+
+        fw.append(timeAndDate);
+        fw.append("\n");
+
+        WritingToFile();
+        fw.flush();
+        fw.close();
+     } catch (FileNotFoundException e) {
+          //  CREATED ERROR MESSAGE TO HELP DETERMINE WHICH PART OF CODE IS ACTUALLY BREAKING
+          System.out.println("Could  NOT write data into file");
+      }
+
  }
+}
 
 class NurseAppCompileTest {
 
@@ -111,10 +139,23 @@ class NurseAppCompileTest {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
+
+        File source = new File("Journal.csv");
         PeopleInteraction pi = new PeopleInteraction();
-        pi.CreateFile();
+        if(source.exists() != true)
+        {
+          //CREATING THE FILES NEEDED FOR THE PROGRAM
+          System.out.println("Sorry missing some components need to generated");
+          pi.CreateFile();
+        }else if(source.exists() == true)
+        {
+          // Need to change this message once protype is done
+          System.out.println("File Exists");
+        }
+
         pi.FileSetup();
         pi.getData();
+        pi.writeData();
     }
 
 }
